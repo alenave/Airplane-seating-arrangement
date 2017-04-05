@@ -40,6 +40,7 @@ public class SeatingTest extends TestCase {
     }
 
     public void test_check_aisle() throws Exception {
+        //        seating.getAisles().get(0) will return 1st seat of aisle
         assertEquals(0, seating.getAisles().get(0).getRow());
         assertEquals(2, seating.getAisles().get(0).getColumn());
         assertEquals(0, seating.getAisles().get(1).getRow());
@@ -49,6 +50,7 @@ public class SeatingTest extends TestCase {
 
 
     public void test_check_window() throws Exception {
+        //        seating.getWindows().get(0) will return 1st seat of window
         assertEquals(0, seating.getWindows().get(0).getRow());
         assertEquals(0, seating.getWindows().get(0).getColumn());
         assertEquals(0, seating.getWindows().get(1).getRow());
@@ -57,6 +59,7 @@ public class SeatingTest extends TestCase {
     }
 
     public void test_check_middle() throws Exception {
+        //        seating.getMiddles().get(0) will return 1st seat of middle
         assertEquals(0, seating.getMiddles().get(0).getRow());
         assertEquals(1, seating.getMiddles().get(0).getColumn());
         assertEquals(0, seating.getMiddles().get(1).getRow());
