@@ -1,19 +1,19 @@
 package com.alenave.airplaneseating.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.alenave.airplaneseating.R;
-import com.alenave.airplaneseating.model.Aisle;
-import com.alenave.airplaneseating.model.Middle;
-import com.alenave.airplaneseating.model.Seating;
-import com.alenave.airplaneseating.model.Window;
+import com.alenave.airplaneseating.adapter.SeatAdapter;
+import com.alenave.airplaneseating.model.SeatArrangement;
 
 import static com.alenave.airplaneseating.MainActivity.bays;
 
 public class SeatDisplay extends AppCompatActivity {
-    private TextView arrangement;
+    private RecyclerView recyclerView;
+    private SeatAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,24 +24,25 @@ public class SeatDisplay extends AppCompatActivity {
     }
 
     private void initViewAndSetListeners() {
-        arrangement = (TextView) findViewById(R.id.arrangment);
+        recyclerView = (RecyclerView) findViewById(R.id.primary_recycler_view);
     }
 
     private void displaySeats() {
-        Seating seating = new Seating(bays);
-        String sequence = "";
-        seating.setAisle();
-        for(Aisle aisle : seating.getAisles()) {
-            sequence += aisle.getBay() + " " + aisle.getRow() + "," + aisle.getColumn() + " Aisle" + "\n";
-        }
-        seating.setWindow();
-        for(Window window : seating.getWindows()) {
-            sequence += window.getBay() + " " +  window.getRow() + "," + window.getColumn() + " Win" + "\n";
-        }
-        seating.setMiddle();
-        for(Middle middle : seating.getMiddles()) {
-            sequence += middle.getBay() + " " + middle.getRow() + "," + middle.getColumn() + " Mid" + "\n";
-        }
-        arrangement.setText(sequence);
+        SeatArrangement seatArrangement = new SeatArrangement(bays);
+        seatArrangement.setArrangement();
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), bays.size());
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new SeatAdapter(this, bays);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

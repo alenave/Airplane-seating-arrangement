@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:hint="Enter number of bays"
         android:imeOptions="actionNext"
-        android:inputType="number"/>
+        android:inputType="number" />
 
 
     <LinearLayout
@@ -30,25 +30,25 @@
             android:id="@+id/bay_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="enter size of bay 1"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="enter size of bay 1" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/bay_row"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:hint="bay rows"
             android:imeOptions="actionNext"
-            android:hint="bay rows" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/bay_column"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:hint="bay columns"
             android:imeOptions="actionDone"
-            android:hint="bay columns" />
+            android:inputType="number" />
     </LinearLayout>
 
     <Button
