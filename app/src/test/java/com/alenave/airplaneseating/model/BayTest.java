@@ -3,14 +3,12 @@ package com.alenave.airplaneseating.model;
 import junit.framework.TestCase;
 
 import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.alenave.airplaneseating.MainActivity.bays;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by alenave on 04/04/17.

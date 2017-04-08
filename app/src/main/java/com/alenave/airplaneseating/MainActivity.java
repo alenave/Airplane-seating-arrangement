@@ -2,7 +2,6 @@ package com.alenave.airplaneseating;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.KeyEvent;
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
-    Button submit;
-    EditText numberOfBays;
+    private Button submit;
+    private EditText numberOfBays;
     private EditText numberOfColumns;
     private EditText numberOfRows;
     private TextView bayMessage;
 
-    int bayCounter = 0;
+    private int bayCounter = 0;
     public static List<Bay> bays = new ArrayList<>();
     private Bay bay;
 
@@ -38,16 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViewAndSetListeners();
     }
 
-    private void initViewAndSetListeners() {
-        numberOfRows = (EditText) findViewById(R.id.bay_row);
-        numberOfColumns = (EditText) findViewById(R.id.bay_column);
-        numberOfBays = (EditText) findViewById(R.id.number_of_bays);
-        numberOfBays.setFilters(new InputFilter[]{new InputFilterMinMax(2, 4)});
-        bayMessage = (TextView) findViewById(R.id.bay_message);
-        submit = (Button) findViewById(R.id.submit);
-        submit.setOnClickListener(this);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -56,6 +45,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            submit.performClick();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        bays.clear();
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
+
+    private void initViewAndSetListeners() {
+        numberOfRows = (EditText) findViewById(R.id.bay_row);
+        numberOfColumns = (EditText) findViewById(R.id.bay_column);
+        numberOfBays = (EditText) findViewById(R.id.number_of_bays);
+        numberOfBays.setFilters(new InputFilter[]{new InputFilterMinMax(2, 4)});
+        bayMessage = (TextView) findViewById(R.id.bay_message);
+        submit = (Button) findViewById(R.id.submit);
+        submit.setOnClickListener(this);
+        numberOfColumns.setOnEditorActionListener(this);
+    }
+
 
     private void onClickSubmit() {
         if (!numberOfBays.getText().toString().equals("") && !numberOfRows.getText().toString().equals("") && !numberOfColumns.getText().toString().equals("")) {
@@ -85,24 +105,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(getApplicationContext(), "Please enter bay values", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            submit.performClick();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        bays.clear();
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
     }
 }

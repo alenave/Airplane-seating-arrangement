@@ -6,4 +6,7 @@ package com.alenave.airplaneseating.util;
 
 public interface MagicNumbers {
     static final int MIN_NUMBER_OF_BAY = 2;
+    static final String AISLE = "aisle";
+    static final String MIDDLE = "middle";
+    static final String WINDOW = "window";
 }
