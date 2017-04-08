@@ -41,7 +41,7 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.PrimaryViewHol
 
     @Override
     public SeatAdapter.PrimaryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.primary_grid, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.secondry_grid, null);
         PrimaryViewHolder viewHolder = new PrimaryViewHolder(view);
         return viewHolder;
     }
