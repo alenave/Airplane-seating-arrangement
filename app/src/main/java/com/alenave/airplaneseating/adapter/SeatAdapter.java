@@ -2,6 +2,7 @@ package com.alenave.airplaneseating.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -98,11 +99,23 @@ public class SeatAdapter extends RecyclerView.Adapter<SeatAdapter.PrimaryViewHol
         public void bindView(Seat seat) {
             seatNumber.setText(String.valueOf(seat.getNumber()));
             if (seat.getType().equals(AISLE)) {
-                seatView.setBackgroundColor(Color.BLUE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.aisle, context.getTheme()));
+                } else {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.aisle));
+                }
             } else if (seat.getType().equals(WINDOW)) {
-                seatView.setBackgroundColor(Color.GREEN);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.window, context.getTheme()));
+                } else {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.window));
+                }
             } else {
-                seatView.setBackgroundColor(Color.RED);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.middle, context.getTheme()));
+                } else {
+                    seatView.setBackgroundColor(context.getResources().getColor(R.color.middle));
+                }
             }
         }
     }
